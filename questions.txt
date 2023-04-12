@@ -1,51 +1,26 @@
-mixed up from months of slow progress
-
-while working through section 24.3 (maybe before I cant remember)
-I couldn't run the files to work on the localhost page
-but was able to code along so knoweledge is meh
-
-localhost wouldn't run the section but still works for other things. if i recall
-was a problem with something in requirements.txt with flask_sqlalchemy that wasn't 
-working properly
-
-which also didn't work in insomnia
+tests failing. even when using solution.
 
 
-trying to seed.py but not sure what i'm doing wrong since its
-asking for app.py but didn't say to work on that file yet?
-or was I supposed to just set it up as well?
 
-python3 -m unittests -v tests
+(venv) windie@Davids-MBP flask-cupcakes % python -m unittest -v tests
+test_create_cupcake (tests.CupcakeViewsTestCase) ... ERROR
+test_get_cupcake (tests.CupcakeViewsTestCase) ... ERROR
+test_list_cupcakes (tests.CupcakeViewsTestCase) ... ERROR
 
-similar RuntimeError
-(venv) windie@Davids-MacBook-Pro flask-cupcakes % python3 -m unittest -v tests
+======================================================================
+ERROR: test_create_cupcake (tests.CupcakeViewsTestCase)
+----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 193, in _run_module_as_main
-    "__main__", mod_spec)
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/runpy.py", line 85, in _run_code
-    exec(code, run_globals)
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/__main__.py", line 18, in <module>
-    main(module=None)
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/main.py", line 100, in __init__
-    self.parseArgs(argv)
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/main.py", line 147, in parseArgs
-    self.createTests()
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/main.py", line 159, in createTests
-    self.module)
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/loader.py", line 220, in loadTestsFromNames
-    suites = [self.loadTestsFromName(name, module) for name in names]
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/loader.py", line 220, in <listcomp>
-    suites = [self.loadTestsFromName(name, module) for name in names]
-  File "/usr/local/Cellar/python@3.7/3.7.13_1/Frameworks/Python.framework/Versions/3.7/lib/python3.7/unittest/loader.py", line 154, in loadTestsFromName
-    module = __import__(module_name)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/tests.py", line 13, in <module>
-    db.drop_all()
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 901, in drop_all
-    self._call_for_binds(bind_key, "drop_all")
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 855, in _call_for_binds
-    engine = self.engines[key]
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 636, in engines
-    app = current_app._get_current_object()  # type: ignore[attr-defined]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/tests.py", line 39, in setUp
+    Cupcake.query.delete()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/model.py", line 31, in __get__
+    cls, session=cls.__fsa__.session()  # type: ignore[arg-type]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 218, in __call__
+    sess = self.registry()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/util/_collections.py", line 639, in __call__
+    key = self.scopefunc()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/session.py", line 102, in _app_ctx_id
+    return id(app_ctx._get_current_object())  # type: ignore[attr-defined]
   File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/werkzeug/local.py", line 513, in _get_current_object
     raise RuntimeError(unbound_message) from None
 RuntimeError: Working outside of application context.
@@ -54,21 +29,20 @@ This typically means that you attempted to use functionality that needed
 the current application. To solve this, set up an application context
 with app.app_context(). See the documentation for more information.
 
-
-
-seeding wrong? 
-
-
-(venv) windie@Davids-MacBook-Pro flask-cupcakes % python3 seed.py
+======================================================================
+ERROR: test_get_cupcake (tests.CupcakeViewsTestCase)
+----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "seed.py", line 5, in <module>
-    db.drop_all()
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 901, in drop_all
-    self._call_for_binds(bind_key, "drop_all")
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 855, in _call_for_binds
-    engine = self.engines[key]
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/extension.py", line 636, in engines
-    app = current_app._get_current_object()  # type: ignore[attr-defined]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/tests.py", line 39, in setUp
+    Cupcake.query.delete()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/model.py", line 31, in __get__
+    cls, session=cls.__fsa__.session()  # type: ignore[arg-type]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 218, in __call__
+    sess = self.registry()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/util/_collections.py", line 639, in __call__
+    key = self.scopefunc()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/session.py", line 102, in _app_ctx_id
+    return id(app_ctx._get_current_object())  # type: ignore[attr-defined]
   File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/werkzeug/local.py", line 513, in _get_current_object
     raise RuntimeError(unbound_message) from None
 RuntimeError: Working outside of application context.
@@ -76,92 +50,31 @@ RuntimeError: Working outside of application context.
 This typically means that you attempted to use functionality that needed
 the current application. To solve this, set up an application context
 with app.app_context(). See the documentation for more information.
-(venv) windie@Davids-MacBook-Pro flask-cupcakes % 
 
-
- DEPRECATION: itsdangerous is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
-  Running setup.py install for itsdangerous ... done
-  DEPRECATION: pycparser is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
-  Running setup.py install for pycparser ... done
-  Attempting uninstall: bcrypt
-    Found existing installation: bcrypt 4.0.1
-    Uninstalling bcrypt-4.0.1:
-      Successfully uninstalled bcrypt-4.0.1
-  DEPRECATION: Flask-Bcrypt is being installed using the legacy 'setup.py install' method, because it does not have a 'pyproject.toml' and the 'wheel' package is not installed. pip 23.1 will enforce this behaviour change. A possible replacement is to enable the '--use-pep517' option. Discussion can be found at https://github.com/pypa/pip/issues/8559
-
-  (venv) windie@Davids-MacBook-Pro auth_demo % flask run
- * Environment: production
-   WARNING: Do not use the development server in a production environment.
-   Use a production WSGI server instead.
- * Debug mode: off
+======================================================================
+ERROR: test_list_cupcakes (tests.CupcakeViewsTestCase)
+----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/bin/flask", line 8, in <module>
-    sys.exit(main())
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 894, in main
-    cli.main(args=args, prog_name=name)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 557, in main
-    return super(FlaskGroup, self).main(*args, **kwargs)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/core.py", line 717, in main
-    rv = self.invoke(ctx)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/core.py", line 1137, in invoke
-    return _process_result(sub_ctx.command.invoke(sub_ctx))
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/core.py", line 956, in invoke
-    return ctx.invoke(self.callback, **ctx.params)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/core.py", line 555, in invoke
-    return callback(*args, **kwargs)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/decorators.py", line 64, in new_func
-    return ctx.invoke(f, obj, *args, **kwargs)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/click/core.py", line 555, in invoke
-    return callback(*args, **kwargs)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 767, in run_command
-    app = DispatchingApp(info.load_app, use_eager_loading=eager_loading)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 293, in __init__
-    self._load_unlocked()
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 317, in _load_unlocked
-    self._app = rv = self.loader()
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 377, in load_app
-    raise_if_not_found=False)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask/cli.py", line 235, in locate_app
-    __import__(module_name)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/auth_demo/app.py", line 3, in <module>
-    from models import connect_db, db, User, Tweet
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/auth_demo/models.py", line 4, in <module>
-    db = SQLAlchemy()
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py", line 680, in __init__
-    _include_sqlalchemy(self, query_class)
-  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py", line 79, in _include_sqlalchemy
-    for key in module.__all__:
-AttributeError: module 'sqlalchemy' has no attribute '__all__'
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/tests.py", line 39, in setUp
+    Cupcake.query.delete()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/model.py", line 31, in __get__
+    cls, session=cls.__fsa__.session()  # type: ignore[arg-type]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/orm/scoping.py", line 218, in __call__
+    sess = self.registry()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/sqlalchemy/util/_collections.py", line 639, in __call__
+    key = self.scopefunc()
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/flask_sqlalchemy/session.py", line 102, in _app_ctx_id
+    return id(app_ctx._get_current_object())  # type: ignore[attr-defined]
+  File "/Users/windie/Documents/Springboard/SEC/Flask/flask-cupcakes/venv/lib/python3.7/site-packages/werkzeug/local.py", line 513, in _get_current_object
+    raise RuntimeError(unbound_message) from None
+RuntimeError: Working outside of application context.
 
-In [1]: %run app.py
----------------------------------------------------------------------------
-AttributeError                            Traceback (most recent call last)
-~/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/auth_demo/app.py in <module>
-      1 from flask import Flask, render_template, redirect, session, flash
-      2 from flask_debugtoolbar import DebugToolbarExtension
-----> 3 from models import connect_db, db, User, Tweet
-      4 from forms import UserForm, TweetForm
-      5 from sqlalchemy.exc import IntegrityError
+This typically means that you attempted to use functionality that needed
+the current application. To solve this, set up an application context
+with app.app_context(). See the documentation for more information.
 
-~/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/auth_demo/models.py in <module>
-      2 from flask_bcrypt import Bcrypt
-      3 
-----> 4 db = SQLAlchemy()
-      5 
-      6 bcrypt = Bcrypt()
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
 
-~/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py in __init__(self, app, use_native_unicode, session_options, metadata, query_class, model_class)
-    678         self._engine_lock = Lock()
-    679         self.app = app
---> 680         _include_sqlalchemy(self, query_class)
-    681 
-    682         if app is not None:
-
-~/Documents/Springboard/SEC/Flask/flask-hashing-login-demo/VideoCode/venv/lib/python3.7/site-packages/flask_sqlalchemy/__init__.py in _include_sqlalchemy(obj, cls)
-     77 def _include_sqlalchemy(obj, cls):
-     78     for module in sqlalchemy, sqlalchemy.orm:
----> 79         for key in module.__all__:
-     80             if not hasattr(obj, key):
-     81                 setattr(obj, key, getattr(module, key))
-
-AttributeError: module 'sqlalchemy' has no attribute '__all__'
+FAILED (errors=3)
+(venv) windie@Davids-MBP flask-cupcakes % 
