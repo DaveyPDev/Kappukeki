@@ -12,6 +12,7 @@ app.config['SECRET_KEY'] = 'not-so-secret'
 
 connect_db(app)
 
+
 @app.route('/')
 def root():
     """ Homepage """
@@ -34,7 +35,8 @@ def create_cupcake():
     cupcake = Cupcake(
         flavor=data['flavor'],
         rating=data['rating'],
-        size=data['image'] or None
+        size=data['size'],
+        image=data['image'] or None
     )
 
     db.session.add(cupcake)
