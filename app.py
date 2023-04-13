@@ -10,7 +10,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SECRET_KEY'] = 'not-so-secret'
 
 connect_db(app)
-
+app.app_context().push() 
 
 @app.route('/')
 def root():
@@ -22,7 +22,7 @@ def root():
 def list_cupcakes():
     """ All Cupcake info """
 
-    cupcakes = [cupcake.to_dict() for cupcake in Cupcake.query.all()]
+    cupcakes = [cupcake.dict_cupcake() for cupcake in Cupcake.query.all()]
     return jsonify(cupcakes=cupcakes)
 
 @app.route('/api/cupcakes', methods=["POST"])
@@ -41,7 +41,7 @@ def create_cupcake():
     db.session.add(cupcake)
     db.session.commit()
 
-    return (jsonify(cupcake=cupcake.to_dict()), 201)
+    return (jsonify(cupcake=cupcake.dict_cupcake()), 201)
 
 @app.route('/api/cupcakes/<int:cupcake_id>')
 def single_cupcake(cupcake_id):
@@ -49,5 +49,33 @@ def single_cupcake(cupcake_id):
 
     cupcake = Cupcake.query.get_or_404(cupcake_id)
 
-    return jsonify(cupcake=cupcake.to_dict())
+    return jsonify(cupcake=cupcake.dict_cupcake())
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=["PATCH"])
+def update_cupcake(cupcake_id):
+    """ Update Cupcake Info """
+
+    data = request.json 
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    cupcake.flavor= data['flavor']
+    cupcake.rating= data['rating']
+    cupcake.size= data['size']
+    cupcake.image= data['image']
+    
+    db.session.add(cupcake)
+    db.session.commit()
+
+    return (jsonify(cupcake=cupcake.dict_cupcake()))
+
+@app.route('/api/cupcakes/<int:cupcake_id>', methods=["DELETE"])
+def delete_cupcake(cupcake_id):
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    db.session.delete(cupcake)
+    db.session.commit()
+
+    return jsonify(message='Deleted')
 
