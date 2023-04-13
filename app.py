@@ -2,6 +2,7 @@
 
 from flask import Flask, render_template, jsonify, request
 from models import db, connect_db, Cupcake
+from flask_cors import CORS
 
 app = Flask(__name__)
 
