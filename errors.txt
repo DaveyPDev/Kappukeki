@@ -1,0 +1,52 @@
+! i believe I'm getting the form to submit but missing something adding it to the list to show up?
+
+
+! when submitting a cupcake the console gives me
+! the form submits but nothing updates
+! terminal keeps telling me something about play() not working
+! ive had this pop up the last few sections and no idea what, how, or why 
+! something about AudioContext not loading? even though i have no audio/video?
+
+chunk-BA7DUS22.js:120 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+OZ @ chunk-BA7DUS22.js:120
+(anonymous) @ chunk-BA7DUS22.js:120
+chunk-PP47MAMX.js:1 The AudioContext was not allowed to start. It must be resumed (or created) after a user gesture on the page. https://goo.gl/7K7WLu
+D @ chunk-PP47MAMX.js:1
+(anonymous) @ chunk-PP47MAMX.js:1
+chunk-PP47MAMX.js:1 Uncaught (in promise) DOMException: play() failed because the user didn't interact with the document first. https://goo.gl/xX8pDD
+G @ chunk-PP47MAMX.js:1
+(anonymous) @ chunk-PP47MAMX.js:1
+K @ chunk-PP47MAMX.js:1
+(anonymous) @ chunk-L54VO45R.js:1
+cupcakes.js:36 Flavor: lemon, Rating: 5, Size: large, Image: 
+test.com/cupcake.jpg:1     GET https://test.com/cupcake.jpg net::ERR_CONNECTION_TIMED_OUT
+Image (async)
+buildFragment @ jquery:5072
+jQuery.parseHTML @ jquery:10429
+jQuery.fn.init @ jquery:3207
+jQuery @ jquery:161
+showInitalCupcake @ cupcakes.js:21
+await in showInitalCupcake (async)
+mightThrow @ jquery:3802
+process @ jquery:3870
+setTimeout (async)
+(anonymous) @ jquery:3908
+fire @ jquery:3536
+fireWith @ jquery:3666
+fire @ jquery:3674
+fire @ jquery:3536
+fireWith @ jquery:3666
+ready @ jquery:4146
+completed @ jquery:4156
+127.0.0.1/:1 Uncaught (in promise) Error: A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+
+! terminal gives me 
+
+127.0.0.1 - - [13/Apr/2023 23:10:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2023 23:10:59] "GET /static/cupcakes.js HTTP/1.1" 304 -
+127.0.0.1 - - [13/Apr/2023 23:10:59] "GET /api/cupcakes HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2023 23:11:02] "POST /api/cupcakes HTTP/1.1" 201 -
+127.0.0.1 - - [13/Apr/2023 23:12:24] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2023 23:12:24] "GET /static/cupcakes.js HTTP/1.1" 304 -
+127.0.0.1 - - [13/Apr/2023 23:12:24] "GET /api/cupcakes HTTP/1.1" 200 -
+127.0.0.1 - - [13/Apr/2023 23:12:27] "POST /api/cupcakes HTTP/1.1" 201 -
